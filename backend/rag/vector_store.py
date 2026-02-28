@@ -1,33 +1,20 @@
 import faiss
 import numpy as np
 
+def create_faiss_index(dimension: int) -> faiss.Index:
+    """
+    Creates a FAISS IndexFlatL2 with the given dimension.
+    """
+    return faiss.IndexFlatL2(dimension)
 
-class VectorStore:
-    def __init__(self, dimension):
-        # Use Inner Product for cosine similarity
-        self.index = faiss.IndexFlatIP(dimension)
-        self.text_chunks = []
-
-    def add_embeddings(self, embeddings, chunks):
-        embeddings = np.array(embeddings).astype("float32")
-
-        # Normalize embeddings for cosine similarity
-        faiss.normalize_L2(embeddings)
-
-        self.index.add(embeddings)
-        self.text_chunks.extend(chunks)
-
-    def search(self, query_embedding, k=5):
-        query_embedding = np.array([query_embedding]).astype("float32")
-
-        # Normalize query embedding
-        faiss.normalize_L2(query_embedding)
-
-        distances, indices = self.index.search(query_embedding, k)
-
-        results = []
-        for idx in indices[0]:
-            if idx < len(self.text_chunks):
-                results.append(self.text_chunks[idx])
-
-        return results
+def add_embeddings_to_index(index: faiss.Index, embeddings: np.ndarray) -> None:
+    """
+    Adds embeddings to the FAISS index.
+    Embeddings are assumed to be float32 already.
+    """
+    # Ensure it's float32 for FAISS
+    if not isinstance(embeddings, np.ndarray):
+        embeddings = np.array(embeddings)
+    
+    embeddings = embeddings.astype("float32")
+    index.add(embeddings)
