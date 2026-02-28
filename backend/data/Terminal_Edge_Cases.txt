@@ -1,0 +1,5 @@
+DEL Terminal Edge Cases and Exceptions.
+If a passenger arrives with a pet, they must have prior approval from the airline and the Airport Health Organization (APHO) clearance.
+If a 150ml medicine bottle is flagged during x-ray, the security personnel must manually inspect it using ETD (Explosive Trace Detector). Once cleared, the passenger can proceed.
+Unattended baggage will be cordoned off and reported to the CISF bomb disposal squad immediately.
+Flight delays exceeding 4 hours require the airline to provide meals to passengers at designated food courts.
